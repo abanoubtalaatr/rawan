@@ -13,49 +13,63 @@ class TapPaymentService
     public function pay($data)
     {
         $invoiceData = [
-            'draft' => false,
-            'due' => 1672235072000,
-            'expiry' => 1672235072000,
-            'description' => 'invoice',
-            'mode' => 'PAY',
-            'customer' => [
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'email' => $data['email'],
-                'phone' => [
-                    "country_code" => 965,
-                    "number" => 51234567,
-                ],
+            "draft" => false,
+            "due" => 16722350724000,
+            "expiry" => 16722350742000,
+            "description" => $data['type'],
+            "mode" => "PAY",
+            "customer" => [
+                "first_name" => $data['first_name'],
+                "last_name" => $data['last_name'],
+                "email" => $data['email'],
+                "phone" => [
+                    "country_code" => 966,
+                    "number" => $data['mobile']
+                ]
             ],
-            'order' => [
-                'amount' => 100,
-                'currency' => 'KWD', // Corrected currency value
-                'items' => [
-                    'name' => 'fdslkfds',
-                    'amount' => $data['price'],
-                    'currency' => 'KWD', // Corrected currency value
-                    'description' => 'pay',
-                    'quantity' => 1,
-                ],
+            "post" => [
+              'url' => "http://127.0.0.1:8000/payment",
             ],
-            'tax' => 0,
-            'payment_methods' => ['BENEFIT', 'VISA', 'MASTERCARD', 'APPLE_PAY'],
+            "redirect" =>[
+              'url' => "http://127.0.0.1:8000/payment"
+            ],
+            "order" => [
+                "amount" => $data['price'],
+                "currency" => "SAR",
+                "items" => [
+                    [
+                        "name" => $data['type'],
+                        "amount" => $data['price'],
+                        "currency" => "SAR",
+                        "quantity" => 1
+                    ]
+                ]
+            ],
+            "tax" => 0,
+            "payment_methods" => ["BENEFIT", "VISA", "MASTERCARD", "APPLE_PAY"]
         ];
 
-        $client = new Client([
-            'base_uri' => $this->apiBaseUrl,
+
+        $client = new \GuzzleHttp\Client();
+
+        $request = $client->post($this->apiBaseUrl, [
             'headers' => [
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $this->apiKey,
             ],
+            'json' => $invoiceData, // Include data in the request body as JSON
         ]);
+dd(json_encode($invoiceData));
 
-        $response = $client->post('', [
-            'json' => $invoiceData,
-        ]);
+        $response = json_decode($request->getBody()->getContents(), true);
 
-        return json_decode($response->getBody(), true);
+        if(isset($response['url'])){
+            return $response['url'];
+        }else{
+            return false;
+        }
     }
+
 
 }

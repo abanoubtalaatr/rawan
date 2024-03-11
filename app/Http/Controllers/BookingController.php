@@ -13,8 +13,15 @@ class BookingController extends BaseController
     {
         $data = $request->validated();
         $booking = Booking::query()->create($data);
-        (new TapPaymentService())->pay($data);
+        $data['type'] = "consultation";
 
-        return $this->sendResponse(null, 'تم الحجز');
+        // Assume that pay() returns the redirect URL after processing the payment
+        $redirectUrl = (new TapPaymentService())->pay($data);
+
+        $dataUrl['url'] = $redirectUrl;
+        return $this->sendResponse($dataUrl, 'استخدم هذا الرابط لتحويل المستخدم الي بوابه الدفع');
+        // Redirect the user to the specified URL
+//        return $this->sendResponse()
     }
+
 }

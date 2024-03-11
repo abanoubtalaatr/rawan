@@ -48,9 +48,7 @@ class ProgramController extends BaseController
 
         $program = Program::query()
             ->where('height', '>=', $height)
-            ->orWhere('height', '<=', $height)
             ->orWhere('weight', '>=', $weight)
-            ->orWhere('weight', '<=', $weight)
             ->first();
 
         return $this->sendResponse(ProgramResource::make($program), null);
