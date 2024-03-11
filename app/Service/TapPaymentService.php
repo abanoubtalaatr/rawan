@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 class TapPaymentService
 {
@@ -11,30 +12,28 @@ class TapPaymentService
 
     public function pay($data)
     {
-
-        $data = [
+        $invoiceData = [
             'draft' => false,
             'due' => 1672235072000,
             'expiry' => 1672235072000,
             'description' => 'invoice',
             'mode' => 'PAY',
             'customer' => [
-                'id' => 393939,
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'email' => $data['email'],
                 'phone' => [
-                    'country_code' => 966,
-                    'number' => $data['mobile'],
+                    "country_code" => 965,
+                    "number" => 51234567,
                 ],
             ],
             'order' => [
                 'amount' => 100,
-                'currency' => 'SAR',
+                'currency' => 'KWD', // Corrected currency value
                 'items' => [
-                    'product_id' => rand(1000, 9999),
+                    'name' => 'fdslkfds',
                     'amount' => $data['price'],
-                    'currency' => 'SAR',
+                    'currency' => 'KWD', // Corrected currency value
                     'description' => 'pay',
                     'quantity' => 1,
                 ],
@@ -42,15 +41,21 @@ class TapPaymentService
             'tax' => 0,
             'payment_methods' => ['BENEFIT', 'VISA', 'MASTERCARD', 'APPLE_PAY'],
         ];
-        $headers = [
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->apiKey,
-        ];
 
-        $response = Http::withHeaders($headers)->post($this->apiBaseUrl, $data);
+        $client = new Client([
+            'base_uri' => $this->apiBaseUrl,
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $this->apiKey,
+            ],
+        ]);
 
-        return $response->json();
+        $response = $client->post('', [
+            'json' => $invoiceData,
+        ]);
 
+        return json_decode($response->getBody(), true);
     }
+
 }

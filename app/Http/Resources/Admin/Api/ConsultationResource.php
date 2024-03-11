@@ -16,6 +16,7 @@ class ConsultationResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'price' => $this->price,
             'features' => $this->features,
         ];
