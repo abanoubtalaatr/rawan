@@ -24,7 +24,8 @@ class PackageResource extends JsonResource
             'name' => $this->name,
             'price' => $this->price,
             'member_type' => $this->member_type,
-            'features' => json_decode($this->features),
+            'description' => $this->description,
+            'features' => $this->features,
             'period' => $this->period,
             'discount_value_when_renew'=> $this->discount_value_when_renew
         ];

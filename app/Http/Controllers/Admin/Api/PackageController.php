@@ -17,7 +17,7 @@ class PackageController extends BaseController
     public function store(PackageRequest $request)
     {
         $data = $request->validated();
-        $data['features'] = json_encode($data['features']);
+//        $data['features'] = json_encode($data['features']);
 
         $package = Package::query()->create($data);
 

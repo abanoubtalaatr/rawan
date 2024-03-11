@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('period');
+            $table->text('description');
             $table->string('discount_value_when_renew');
             $table->integer('price');
             $table->string('member_type');
-            $table->json('features');
+            $table->text('features');
             $table->timestamps();
         });
     }
