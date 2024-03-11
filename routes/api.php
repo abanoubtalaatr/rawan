@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin'], function(){
         Route::resource('packages', \App\Http\Controllers\Admin\Api\PackageController::class);
         Route::resource('opinions', \App\Http\Controllers\Admin\Api\OpinionController::class);
         Route::resource('consultations', \App\Http\Controllers\Admin\Api\ConsultationController::class);
+        Route::resource('programs', \App\Http\Controllers\Admin\Api\ProgramController::class);
     });
 });
 
@@ -39,6 +40,7 @@ Route::post('bookings-consultation',[\App\Http\Controllers\BookingController::cl
 
 Route::get('programs', [\App\Http\Controllers\ProgramController::class, 'index']);
 Route::post('bookings-program', [\App\Http\Controllers\ProgramController::class,'store']);
+Route::post('random-program', [\App\Http\Controllers\Admin\Api\ProgramController::class,'randomProgram']);
 
 Route::get('faqs', [\App\Http\Controllers\FAQController::class, 'index']);
 
