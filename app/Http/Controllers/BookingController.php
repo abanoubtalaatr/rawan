@@ -17,6 +17,7 @@ class BookingController extends BaseController
     {
         $data = $request->validated();
         $booking = Booking::query()->create($data);
+
 //        $data['type'] = "consultation";
 
         // Assume that pay() returns the redirect URL after processing the payment

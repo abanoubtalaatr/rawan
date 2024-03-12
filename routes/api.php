@@ -47,7 +47,10 @@ Route::get('programs', [\App\Http\Controllers\ProgramController::class, 'index']
 Route::get('programs/{program}', [\App\Http\Controllers\ProgramController::class, 'show']);
 Route::post('bookings-program', [\App\Http\Controllers\ProgramController::class,'store']);
 Route::post('random-program', [\App\Http\Controllers\Admin\Api\ProgramController::class,'randomProgram']);
-
+Route::get('payment', function (Request $request){
+ $booking = \App\Models\Booking::query()->find($request->input('booking_id'))->update(['payment_status'  => 'paid']);
+ return redirect('/');
+});
 Route::get('faqs', [\App\Http\Controllers\FAQController::class, 'index']);
 
 

@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 class TapPaymentService
 {
     private $apiBaseUrl = 'https://api.tap.company/v2/invoices/';
-    private $apiKey = 'sk_test_GM34ihbYXa8wcKjqenoQFHS2'; // Replace with your actual API key
+    private $apiKey = 'sk_test_52zMsLc1fQ8mejPWTE3bVGgh'; // Replace with your actual API key
 
     public function pay($data)
     {
@@ -28,10 +28,10 @@ class TapPaymentService
                 ]
             ],
             "post" => [
-              'url' => "http://127.0.0.1:8000/payment",
+                'url' =>  url('/'). "/api/payment?booking_id=". $data['id'],
             ],
             "redirect" =>[
-              'url' => "http://127.0.0.1:8000/payment"
+              'url' =>  url('/'). "/api/payment?booking_id=". $data['id'],
             ],
             "order" => [
                 "amount" => $data['price'],

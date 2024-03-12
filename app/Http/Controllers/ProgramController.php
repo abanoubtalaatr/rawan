@@ -22,10 +22,13 @@ class ProgramController extends BaseController
 
         $booking = Booking::query()->create($data);
         $data['type'] = 'Program';
+        $data['id'] = $booking->id;
 
-        (new TapPaymentService())->pay($data);
+       $redirectUrl =  (new TapPaymentService())->pay($data);
 
-        return $this->sendResponse(null, 'تم الحجز');
+       $redirectData['url'] = $redirectUrl;
+
+        return $this->sendResponse($redirectData, 'استخدم هذا الرابط لتحويل المستخدم لبوابه الدفع');
     }
 
     public function show(Program $program)
