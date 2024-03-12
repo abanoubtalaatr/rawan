@@ -22,6 +22,10 @@ class BookingResource extends JsonResource
             'last_name' => $this->last_name,
             'mobile' => $this->mobile,
             'email' => $this->email,
+            'country' => $this->country,
+            'age' => $this->age,
+            'height' => $this->height,
+            'weight' => $this->weight,
             'payment_status' => $this->payment_status == 'not_paid' ? "لم يتم اكمال الدفع": "تم الدفع بنجاح",
         ];
     }

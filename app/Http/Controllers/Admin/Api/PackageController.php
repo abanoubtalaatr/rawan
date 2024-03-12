@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\Api\PackageRequest;
+use App\Http\Requests\BookingPackageRequest;
 use App\Http\Resources\Admin\Api\PackageResource;
+use App\Http\Resources\BookingResource;
+use App\Models\Booking;
 use App\Models\Package;
 
 class PackageController extends BaseController
@@ -42,5 +45,12 @@ class PackageController extends BaseController
         $package->delete();
 
         return $this->sendResponse(null, trans(""));
+    }
+
+    public function bookingPackage(BookingPackageRequest $request)
+    {
+        $booking = Booking::query()->create($request->validated());
+
+       return $this->sendResponse(BookingResource::make($booking),null);
     }
 }

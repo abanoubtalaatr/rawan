@@ -14,8 +14,15 @@ class BookingPackageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'program_id' => ['required', 'exists:programs,id'],
-            'mobile' => ['required']
+            'package_id' => ['required', 'exists:packages,id'],
+            'mobile' => ['required'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'country' => ['required'],
+            'age' => ['required'],
+            'height' => ['required'],
+            'weight' => ['required'],
+            'from_where_know_rawan' => ['required'],
         ];
     }
 }

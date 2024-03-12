@@ -36,6 +36,8 @@ Route::group(['prefix' => 'admin'], function(){
 
 //user
 Route::get('packages', [\App\Http\Controllers\Admin\Api\PackageController::class,'index']);
+Route::post('booking-package', [\App\Http\Controllers\Admin\Api\PackageController::class,'bookingPackage']);
+
 Route::get('packages/{package}', [\App\Http\Controllers\Admin\Api\PackageController::class,'show']);
 
 Route::get('opinions', [\App\Http\Controllers\Admin\Api\OpinionController::class, 'index']);
@@ -45,12 +47,16 @@ Route::post('bookings-consultation',[\App\Http\Controllers\BookingController::cl
 
 Route::get('programs', [\App\Http\Controllers\ProgramController::class, 'index']);
 Route::get('programs/{program}', [\App\Http\Controllers\ProgramController::class, 'show']);
+
 Route::post('bookings-program', [\App\Http\Controllers\ProgramController::class,'store']);
 Route::post('random-program', [\App\Http\Controllers\Admin\Api\ProgramController::class,'randomProgram']);
+
+
 Route::get('payment', function (Request $request){
  $booking = \App\Models\Booking::query()->find($request->input('booking_id'))->update(['payment_status'  => 'paid']);
  return redirect('/');
 });
+
 Route::get('faqs', [\App\Http\Controllers\FAQController::class, 'index']);
 
 
