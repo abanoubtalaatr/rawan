@@ -33,6 +33,6 @@ class ProgramController extends BaseController
 
     public function show(Program $program)
     {
-        $this->sendResponse(ProgramResource::make($program), null);
+       return  $this->sendResponse(ProgramResource::make($program), null);
     }
 }
