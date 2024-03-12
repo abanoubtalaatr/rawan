@@ -19,9 +19,17 @@ class ProgramController extends BaseController
     public function store(BookingProgramRequest $request)
     {
         $data = $request->validated();
+
         $booking = Booking::query()->create($data);
+        $data['type'] = 'Program';
+
         (new TapPaymentService())->pay($data);
 
         return $this->sendResponse(null, 'تم الحجز');
+    }
+
+    public function show(Program $program)
+    {
+        $this->sendResponse(ProgramResource::make($program), null);
     }
 }

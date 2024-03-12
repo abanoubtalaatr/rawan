@@ -28,17 +28,23 @@ Route::group(['prefix' => 'admin'], function(){
         Route::resource('opinions', \App\Http\Controllers\Admin\Api\OpinionController::class);
         Route::resource('consultations', \App\Http\Controllers\Admin\Api\ConsultationController::class);
         Route::resource('programs', \App\Http\Controllers\Admin\Api\ProgramController::class);
+        Route::get('bookings-on-consultations', [\App\Http\Controllers\BookingController::class,'bookingConsultations']);
+        Route::get('bookings-on-packages', [\App\Http\Controllers\BookingController::class,'bookingPackage']);
+        Route::get('bookings-on-programs', [\App\Http\Controllers\BookingController::class,'bookingPrograms']);
     });
 });
 
 //user
 Route::get('packages', [\App\Http\Controllers\Admin\Api\PackageController::class,'index']);
+Route::get('packages/{package}', [\App\Http\Controllers\Admin\Api\PackageController::class,'show']);
+
 Route::get('opinions', [\App\Http\Controllers\Admin\Api\OpinionController::class, 'index']);
 
 Route::get('consultations',[\App\Http\Controllers\Admin\Api\ConsultationController::class,'index']);
 Route::post('bookings-consultation',[\App\Http\Controllers\BookingController::class, 'store']);
 
 Route::get('programs', [\App\Http\Controllers\ProgramController::class, 'index']);
+Route::get('programs/{program}', [\App\Http\Controllers\ProgramController::class, 'show']);
 Route::post('bookings-program', [\App\Http\Controllers\ProgramController::class,'store']);
 Route::post('random-program', [\App\Http\Controllers\Admin\Api\ProgramController::class,'randomProgram']);
 
