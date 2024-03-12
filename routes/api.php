@@ -29,7 +29,7 @@ Route::group(['prefix' => 'admin'], function(){
         Route::resource('consultations', \App\Http\Controllers\Admin\Api\ConsultationController::class);
         Route::resource('programs', \App\Http\Controllers\Admin\Api\ProgramController::class);
         Route::get('bookings-on-consultations', [\App\Http\Controllers\BookingController::class,'bookingConsultations']);
-        Route::get('bookings-on-packages', [\App\Http\Controllers\BookingController::class,'bookingPackage']);
+        Route::get('bookings-on-packages', [\App\Http\Controllers\BookingController::class,'bookingPackages']);
         Route::get('bookings-on-programs', [\App\Http\Controllers\BookingController::class,'bookingPrograms']);
     });
 });
