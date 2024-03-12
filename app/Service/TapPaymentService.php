@@ -60,7 +60,6 @@ class TapPaymentService
             ],
             'json' => $invoiceData, // Include data in the request body as JSON
         ]);
-dd(json_encode($invoiceData));
 
         $response = json_decode($request->getBody()->getContents(), true);
 
