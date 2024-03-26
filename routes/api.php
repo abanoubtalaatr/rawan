@@ -51,9 +51,35 @@ Route::get('programs/{program}', [\App\Http\Controllers\ProgramController::class
 Route::post('bookings-program', [\App\Http\Controllers\ProgramController::class,'store']);
 Route::post('random-program', [\App\Http\Controllers\Admin\Api\ProgramController::class,'randomProgram']);
 
+Route::get('life-styles',[\App\Http\Controllers\LifeStyleController::class, 'index']);
+Route::get('levels', [\App\Http\Controllers\LevelController::class, 'index']);
 
 Route::get('payment', function (Request $request){
  $booking = \App\Models\Booking::query()->find($request->input('booking_id'))->update(['payment_status'  => 'paid']);
+
+ if($booking->program_id) {
+     $program = \App\Models\Program::query()->find($booking->program_id);
+
+     if ($program->number_of_days == 5) {
+         // send email for with like
+         $instructionsForProgram5Days = env("instructionsForProgram5Days");
+         $data['url'] = $instructionsForProgram5Days;
+         (new \App\Service\SendGridService())->sendMail('Instructions', $booking->email, $data, 'emails.booking');
+     }
+     if ($program->number_of_days == 4) {
+         // send email for with like
+         $instructionsForProgram5Days = env("instructionsForProgram4Days");
+         $data['url'] = $instructionsForProgram5Days;
+         (new \App\Service\SendGridService())->sendMail('Instructions', $booking->email, $data, 'emails.booking');
+     }
+     if ($program->number_of_days == 3) {
+         // send email for with like
+         $instructionsForProgram5Days = env("instructionsForProgram3Days");
+         $data['url'] = $instructionsForProgram5Days;
+         (new \App\Service\SendGridService())->sendMail('Instructions', $booking->email, $data, 'emails.booking');
+     }
+ }
+
  return redirect('/');
 });
 

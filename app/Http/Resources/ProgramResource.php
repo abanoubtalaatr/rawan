@@ -21,6 +21,16 @@ class ProgramResource extends JsonResource
             'price' => $this->price,
             'weight' => $this->weight,
             'height' => $this->height,
+            'image' => $this->getImageUrl(),
+            'number_of_days' => $this->number_of_days
         ];
+    }
+
+    private function getImageUrl()
+    {
+        if ($this->image) {
+            return asset('images/' . $this->image);
+        }
+        return null;
     }
 }

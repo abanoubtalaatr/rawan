@@ -17,16 +17,44 @@ class ProgramController extends BaseController
 
     public function store(ProgramRequest $request)
     {
-        $data = Program::query()->create($request->validated());
+        $validatedData = $request->validated();
 
-        return $this->sendResponse(ProgramResource::make($data), trans("تمت الاضافة"));
+        // Upload the image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $validatedData['image'] = $imageName;
+        }
+
+        // Create the program with the uploaded image
+        $program = Program::create($validatedData);
+
+        // Return the response with the resource including the uploaded image
+        return $this->sendResponse(ProgramResource::make($program), trans("تمت الاضافة"));
     }
+
 
     public function update(ProgramRequest $request, Program $program)
     {
+        // Update the program data
         $program->update($request->validated());
+
+        // Upload the image if it exists in the request
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+
+            // Update the program's image field with the new image name
+            $program->image = $imageName;
+            $program->save();
+        }
+
+        // Return the updated resource
         return $this->sendResponse(ProgramResource::make($program->refresh()), trans("الاجراء تم بنجاح"));
     }
+
 
     public function show(Program $program)
     {
@@ -41,16 +69,55 @@ class ProgramController extends BaseController
 
     public function randomProgram(Request $request)
     {
-        $request->validate(['weight' => 'required', 'height' => 'required']);
+        $request->validate(['level' => 'required', 'life_style' => 'required']);
 
-        $weight = $request->input('weight');
-        $height = $request->input('height');
+        $level = $request->input('level');
+        $life_style = $request->input('life_style');
 
-        $program = Program::query()
-            ->where('height', '>=', $height)
-            ->orWhere('weight', '>=', $weight)
-            ->first();
+        $program = null;
 
-        return $this->sendResponse(ProgramResource::make($program), null);
+        if ($level == 1) {
+            if ($life_style == 3) {
+                $program = Program::query()
+                    ->where('number_of_days', 4)
+                    ->first();
+            } elseif ($life_style == 2 || $life_style == 1) {
+                $program = Program::query()
+                    ->where('number_of_days', 3)
+                    ->first();
+            }
+        } elseif ($level == 2) {
+            if ($life_style == 3) {
+                $program = Program::query()
+                    ->where('number_of_days', 4)
+                    ->first();
+            } elseif ($life_style == 2) {
+                $program = Program::query()
+                    ->where('number_of_days', 4)
+                    ->first();
+            } elseif ($life_style == 1) {
+                $program = Program::query()
+                    ->where('number_of_days', 3)
+                    ->first();
+            }
+        } elseif ($level == 3) {
+            if ($life_style == 3) {
+                $program = Program::query()
+                    ->where('number_of_days', 4)
+                    ->first();
+            } elseif ($life_style == 2 || $life_style == 1) {
+                $program = Program::query()
+                    ->where('number_of_days', 5)
+                    ->first();
+            }
+        }
+
+        if ($program) {
+            return $this->sendResponse(ProgramResource::make($program), null);
+        } else {
+            // Handle the case when no program matches the given criteria
+            return $this->sendError('No program found for the given criteria.', [], 404);
+        }
     }
+
 }

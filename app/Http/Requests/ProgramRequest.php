@@ -17,8 +17,10 @@ class ProgramRequest extends FormRequest
             'name' => ['required'],
             'price' => ['required'],
             'features' => ['required'],
-            'weight'=> ['required'],
-            'height'=> ['required'],
+            'weight'=> ['nullable'],
+            'height'=> ['nullable'],
+            'image' => ['required', 'mimes:jpg,png,jpeg', 'max:2048'],
+            'number_of_days' => ['required'],
         ];
     }
 }
