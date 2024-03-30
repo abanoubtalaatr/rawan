@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>شكرًا لحجزك</title>
 </head>
+
 <body dir="rtl" style="font-family: Arial, sans-serif; text-align: right;">
+
 <h1>شكرًا لحجزك</h1>
 <p>تم استلام حجزك بنجاح. نشكرك على ثقتك فينا.</p>
 <p>يمكنك الاطلاع على تفاصيل الحجز وإدارته عبر الرابط التالي:</p>

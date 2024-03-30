@@ -20,7 +20,8 @@ class BookingProgramRequest extends FormRequest
             'email' => ['required', 'email'],
             'price' => ['required'],
             'program_id' => ['required', 'exists:programs,id'],
-            'mobile' => ['required']
+            'mobile' => ['required'],
+            'payment_type' => ['required', 'in:paypal,tap']
         ];
     }
 }

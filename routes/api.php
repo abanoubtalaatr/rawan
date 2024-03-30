@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PayPalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -55,10 +56,12 @@ Route::get('life-styles',[\App\Http\Controllers\LifeStyleController::class, 'ind
 Route::get('levels', [\App\Http\Controllers\LevelController::class, 'index']);
 
 Route::get('payment', function (Request $request){
- $booking = \App\Models\Booking::query()->find($request->input('booking_id'))->update(['payment_status'  => 'paid']);
+ $booking = \App\Models\Booking::query()->find($request->input('booking_id'));
 
  if($booking->program_id) {
      $program = \App\Models\Program::query()->find($booking->program_id);
+     $booking->update(['payment_status'  => 'paid']);
+
 
      if ($program->number_of_days == 5) {
          // send email for with like
@@ -67,9 +70,13 @@ Route::get('payment', function (Request $request){
          (new \App\Service\SendGridService())->sendMail('Instructions', $booking->email, $data, 'emails.booking');
      }
      if ($program->number_of_days == 4) {
+
          // send email for with like
          $instructionsForProgram5Days = env("instructionsForProgram4Days");
-         $data['url'] = $instructionsForProgram5Days;
+         $data = [
+             'url' => env("instructionsForProgram4Days"),
+         ];
+
          (new \App\Service\SendGridService())->sendMail('Instructions', $booking->email, $data, 'emails.booking');
      }
      if ($program->number_of_days == 3) {
@@ -80,9 +87,8 @@ Route::get('payment', function (Request $request){
      }
  }
 
- return redirect('/');
+    return redirect('https://rawan-sa.vercel.app/');
 });
 
 Route::get('faqs', [\App\Http\Controllers\FAQController::class, 'index']);
-
 
