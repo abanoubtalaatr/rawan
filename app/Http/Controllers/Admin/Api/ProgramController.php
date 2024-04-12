@@ -103,11 +103,11 @@ class ProgramController extends BaseController
         } elseif ($level == 3) {
             if ($life_style == 3) {
                 $program = Program::query()
-                    ->where('number_of_days', 4)
+                    ->where('number_of_days', 5)
                     ->first();
             } elseif ($life_style == 2 || $life_style == 1) {
                 $program = Program::query()
-                    ->where('number_of_days', 5)
+                    ->where('number_of_days', 4)
                     ->first();
             }
         }
