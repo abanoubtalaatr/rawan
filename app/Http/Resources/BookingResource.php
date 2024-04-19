@@ -27,6 +27,14 @@ class BookingResource extends JsonResource
             'height' => $this->height,
             'weight' => $this->weight,
             'payment_status' => $this->payment_status == 'not_paid' ? "لم يتم اكمال الدفع": "تم الدفع بنجاح",
+            'goal' => $this->goal,
+            'level' => $this->level,
+            'goal_in_details' => $this->goal_in_details,
+            'level_of_daily_activity' => $this->level_of_daily_activity,
+            'describe_you_life_style' => $this->describe_you_life_style,
+            'do_you_know_how_to_withdraw_your_calories' => $this->do_you_know_how_to_withdraw_your_calories,
+            "how_did_you_know_about_rawan" => $this->how_did_you_know_about_rawan,
+            'free_space_for_expression' => $this->free_space_for_expression,
         ];
     }
 }

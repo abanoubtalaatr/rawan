@@ -22,7 +22,15 @@ class BookingPackageRequest extends FormRequest
             'age' => ['required'],
             'height' => ['required'],
             'weight' => ['required'],
-            'from_where_know_rawan' => ['required'],
+            'from_where_know_rawanhow_did_you_know_about_rawan' => ['required'],
+            'goal' => ['nullable'],
+            'level' => ['nullable'],
+            'goal_in_details' => ['nullable'],
+            'level_of_daily_activity' => ['nullable'],
+            'describe_you_life_style' => ['nullable'],
+            'do_you_know_how_to_withdraw_your_calories' => ['nullable'],
+            'how_did_you_know_about_rawan' => ['nullable'],
+            'free_space_for_expression' => ['nullable'],
         ];
     }
 }
