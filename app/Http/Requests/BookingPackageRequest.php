@@ -22,7 +22,7 @@ class BookingPackageRequest extends FormRequest
             'age' => ['required'],
             'height' => ['required'],
             'weight' => ['required'],
-            'from_where_know_rawanhow_did_you_know_about_rawan' => ['required'],
+            'from_where_know_rawan' => ['required'],
             'goal' => ['nullable'],
             'level' => ['nullable'],
             'goal_in_details' => ['nullable'],
