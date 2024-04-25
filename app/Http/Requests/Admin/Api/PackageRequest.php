@@ -19,8 +19,10 @@ class PackageRequest extends FormRequest
             'period' => ['required'],
             'price' => ['required'],
             'member_type' => ['required'],
-            'features' => [ 'required'],
-            'description' => ['required']
+            'features' => ['required'],
+            'description' => ['required'],
+            'price_one' => ['nullable'],
+            'price_two' => ['nullable'],
         ];
     }
 }

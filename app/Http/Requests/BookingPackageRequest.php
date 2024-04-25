@@ -31,6 +31,8 @@ class BookingPackageRequest extends FormRequest
             'do_you_know_how_to_withdraw_your_calories' => ['nullable'],
             'how_did_you_know_about_rawan' => ['nullable'],
             'free_space_for_expression' => ['nullable'],
+            'price_one' => ['nullable'],
+            'price_two' => ['nullable']
         ];
     }
 }

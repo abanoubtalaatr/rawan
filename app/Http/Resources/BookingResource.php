@@ -26,7 +26,7 @@ class BookingResource extends JsonResource
             'age' => $this->age,
             'height' => $this->height,
             'weight' => $this->weight,
-            'payment_status' => $this->payment_status == 'not_paid' ? "لم يتم اكمال الدفع": "تم الدفع بنجاح",
+            'payment_status' => $this->payment_status == 'not_paid' ? "لم يتم اكمال الدفع" : "تم الدفع بنجاح",
             'goal' => $this->goal,
             'level' => $this->level,
             'goal_in_details' => $this->goal_in_details,
@@ -35,6 +35,8 @@ class BookingResource extends JsonResource
             'do_you_know_how_to_withdraw_your_calories' => $this->do_you_know_how_to_withdraw_your_calories,
             "how_did_you_know_about_rawan" => $this->how_did_you_know_about_rawan,
             'free_space_for_expression' => $this->free_space_for_expression,
+            'price_one' => $this->price_one,
+            'price_two' => $this->price_two,
         ];
     }
 }

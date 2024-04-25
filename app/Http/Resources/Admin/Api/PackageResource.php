@@ -27,7 +27,9 @@ class PackageResource extends JsonResource
             'description' => $this->description,
             'features' => $this->features,
             'period' => $this->period,
-            'discount_value_when_renew'=> $this->discount_value_when_renew
+            'discount_value_when_renew' => $this->discount_value_when_renew,
+            'price_one' => $this->price_one,
+            'price_two' => $this->price_two,
         ];
     }
 }
