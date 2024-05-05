@@ -14,10 +14,11 @@ class BookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-//            'first_name' => ['required'],
-//            'last_name' => ['required'],
-//            'email' => ['required', 'email'],
-//            'price' => ['required'],
+            'first_name' => ['nullable'],
+            //            'last_name' => ['required'],
+            //            'email' => ['required', 'email'],
+            //            'price' => ['required'],
+
             'consultation_id' => ['required', 'exists:consultations,id'],
             'mobile' => ['required']
         ];
