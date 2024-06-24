@@ -14,13 +14,13 @@ class ProgramRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
+            'name' => ['nullable'],
             'price' => ['required'],
-            'features' => ['required'],
+            'features' => ['nullable'],
             'weight'=> ['nullable'],
             'height'=> ['nullable'],
-            'image' => ['required', 'mimes:jpg,png,jpeg', 'max:2048'],
-            'number_of_days' => ['required'],
+            'image' => ['nullable', 'mimes:jpg,png,jpeg', 'max:2048'],
+            'number_of_days' => ['nullable'],
         ];
     }
 }
