@@ -14,13 +14,13 @@ class PackageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'min:2'],
-            'discount_value_when_renew' => ['required', 'integer'],
-            'period' => ['required'],
-            'price' => ['required'],
-            'member_type' => ['required'],
-            'features' => ['required'],
-            'description' => ['required'],
+            'name' => ['sometimes'],
+            'discount_value_when_renew' => ['sometimes', 'integer'],
+            'period' => ['sometimes'],
+            'price' => ['sometimes'],
+            'member_type' => ['sometimes'],
+            'features' => ['sometimes'],
+            'description' => ['sometimes'],
             'price_one' => ['nullable'],
             'price_two' => ['nullable'],
         ];
