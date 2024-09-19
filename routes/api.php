@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\VisitorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,7 +55,7 @@ Route::post('random-program', [\App\Http\Controllers\Admin\Api\ProgramController
 
 Route::get('life-styles',[\App\Http\Controllers\LifeStyleController::class, 'index']);
 Route::get('levels', [\App\Http\Controllers\LevelController::class, 'index']);
-
+Route::apiResource('visitors', VisitorController::class);
 Route::get('payment', function (Request $request){
  $booking = \App\Models\Booking::query()->find($request->input('booking_id'));
 
